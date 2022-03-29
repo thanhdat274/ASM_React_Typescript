@@ -1,40 +1,25 @@
-// import { useEffect, useState } from 'react'
-// import logo from './logo.svg'
-// import './App.css'
-// import { Route, Routes } from 'react-router-dom'
-// import { ProductType } from './types/products'
-// import ListProducts from './pages/ListProducts'
-// import axios from 'axios'
-// import AddProduct from './pages/AddProduct'
+import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import axios from 'axios'
+import AdminLayout from './admin/layouts/AdminLayout'
+import Dashboard from './admin/business/Dashboard'
+import WebsiteLayout from './client/layouts/WebsiteLayout'
+import Home from './client/business/Home'
 
-// function App() {
-//   const [products, setProducts] = useState<ProductType[]>([])
+function App() {
+  
+  return (
+    <div>
+      <Routes>
+        <Route path='/' element={<WebsiteLayout />}>
+            <Route index element={<Home />} />
+        </Route>
+        <Route path='/admin' element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </div>
+  )
+}
 
-//   useEffect(()=>{
-//     const getProduct = async ()=>{
-//       const { data } = await axios.get('http://localhost:3001/products');
-//       setProducts(data);
-//     }
-//     getProduct()
-//   },[])
-
-//   const onHandleRemove =(id?: number)=>{
-//     axios.delete('http://localhost:3001/products/'+id);
-//     setProducts(products.filter(item=> item.id !== id));
-//   }
-
-//   const onHandleAdd = async (product: ProductType)=>{
-//    const { data } = await axios.post('http://localhost:3001/products', product);
-//    setProducts([...products, data])
-//   }
-//   return (
-//     <div>
-//       <Routes>
-//         <Route path='/' element={<ListProducts data={products} onRemove={onHandleRemove}/>}/>
-//         <Route path='/add' element={<AddProduct onRemove={onHandleAdd}/>}/>
-//       </Routes>
-//     </div>
-//   )
-// }
-
-// export default App
+export default App
