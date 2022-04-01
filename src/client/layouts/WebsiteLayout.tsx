@@ -1,11 +1,24 @@
-import React from 'react'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
+import Header from "./Header";
 
-type Props = {}
+type Props = {};
 
 const WebsiteLayout = (props: Props) => {
   return (
-    <div>WebsiteLayout</div>
-  )
-}
+    <div className="max-w-full mx-auto">
+      <header>
+        <Header />
+      </header>
 
-export default WebsiteLayout
+      <Outlet />
+
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  );
+};
+
+export default WebsiteLayout;
