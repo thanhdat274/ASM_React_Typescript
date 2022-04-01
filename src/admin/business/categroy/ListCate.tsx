@@ -31,7 +31,7 @@ const ListCate = (props: ListCate) => {
                                     <th>Danh mục</th>
                                     <th colSpan={2}>Action</th>
                                     <th>
-                                        <a href="/admin/category/add" className="btn btn-sm btn-success">Tạo mới</a>
+                                        <Link to="/admin/category/add" className="btn btn-sm btn-success">Tạo mới</Link>
                                     </th>
                                 </tr>
                             </thead>

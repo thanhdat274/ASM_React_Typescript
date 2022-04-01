@@ -8,9 +8,9 @@ const Sidebar = (props: Props) => {
         <div>
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
 
-                <Link to="#" className="brand-link">
+                <Link to="/" className="brand-link">
                     <img src="../../../src/public/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
-                    <span className="brand-text font-weight-light">ADMIN</span>
+                    <span className="brand-text font-weight-light">Trang chủ</span>
                 </Link>
 
                 <div className="sidebar">
@@ -19,7 +19,7 @@ const Sidebar = (props: Props) => {
                             <img src="../../../src/public/admin/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
                         </div>
                         <div className="info">
-                            <Link to="/" className="d-block">ADMIN</Link>
+                            <Link to="/admin" className="d-block">ADMIN</Link>
                         </div>
                     </div>
                     
@@ -37,7 +37,7 @@ const Sidebar = (props: Props) => {
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li className="nav-item ">
-                                <Link to="/" className="nav-link ">
+                                <Link to="/admin" className="nav-link ">
                                     <i className="nav-icon fas fa-tachometer-alt" />
                                     <p>
                                         Dashboard
@@ -55,13 +55,13 @@ const Sidebar = (props: Props) => {
                                 </Link>
                                 <ul className="nav nav-treeview">
                                     <li className="nav-item">
-                                        <Link to="#" className="nav-link">
+                                        <Link to="/admin/category" className="nav-link">
                                             <i className="far fa-circle nav-icon" />
                                             <p>Danh sách</p>
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="#" className="nav-link">
+                                        <Link to="/admin/category/add" className="nav-link">
                                             <i className="far fa-circle nav-icon" />
                                             <p>Tạo mới</p>
                                         </Link>
