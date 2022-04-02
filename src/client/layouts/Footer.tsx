@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div className="footer-tong">
-            <div className="footer-tong1">
+        <div className="bg-[#dadada] h-[500px]">
+            <div className="max-w-[1440px] mx-auto pt-[20px]">
                 <div className="flex">
                     <div className="box">
                         <h1 className="title">HỆ THỐNG CỬA HÀNG</h1>
-                        <div className="mb-[20px]">
+                        <div className="">
                             <h1 className="title-1">Hà Nội</h1>
                             <div className="nd">
                                 <p>120 Thái Hà, Q. Đống Đa</p>
@@ -40,14 +40,14 @@ const Footer = () => {
                         <h1 className="title">QUY ĐỊNH - CHÍNH SÁCH</h1>
                         <div>
                             <ul className="relative">
-                                <li className="my-[10px] ml-[15px]"><Link to="">Chính sách bảo hành</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Chính sách vận chuyển</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Chính sách đổi trả hàng</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Chính sách bảo mật thông tin</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Hướng dẫn thanh toán</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Hướng dẫn mua hàng Online</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Dịch vụ Ship COD Toàn quốc</Link></li>
-                                <li className="my-[10px] ml-[15px]"><Link to="">Chính sách đại lý linh, phụ kiện</Link></li>
+                                <li className="menu-footer"><Link to="">Chính sách bảo hành</Link></li>
+                                <li className="menu-footer"><Link to="">Chính sách vận chuyển</Link></li>
+                                <li className="menu-footer"><Link to="">Chính sách đổi trả hàng</Link></li>
+                                <li className="menu-footer"><Link to="">Chính sách bảo mật thông tin</Link></li>
+                                <li className="menu-footer"><Link to="">Hướng dẫn thanh toán</Link></li>
+                                <li className="menu-footer"><Link to="">Hướng dẫn mua hàng Online</Link></li>
+                                <li className="menu-footer"><Link to="">Dịch vụ Ship COD Toàn quốc</Link></li>
+                                <li className="menu-footer"><Link to="">Chính sách đại lý linh, phụ kiện</Link></li>
                             </ul>
                         </div>
                     </div>

@@ -69,6 +69,54 @@ const Sidebar = (props: Props) => {
                                 </ul>
                             </li>
 
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="fa fa-truck" aria-hidden="true" />
+                                    <p>
+                                       Sản phẩm
+                                        <i className="fas fa-angle-left right" />
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/admin/product" className="nav-link">
+                                            <i className="far fa-circle nav-icon" />
+                                            <p>Danh sách</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/product/add" className="nav-link">
+                                            <i className="far fa-circle nav-icon" />
+                                            <p>Tạo mới</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="fas fa-user-circle" aria-hidden="true" />
+                                    <p>
+                                       Tài khoản 
+                                        <i className="fas fa-angle-left right" />
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/admin/user" className="nav-link">
+                                            <i className="far fa-circle nav-icon" />
+                                            <p>Danh sách</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/user/add" className="nav-link">
+                                            <i className="far fa-circle nav-icon" />
+                                            <p>Tạo mới</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+
                         </ul>
                     </nav>
                 </div>

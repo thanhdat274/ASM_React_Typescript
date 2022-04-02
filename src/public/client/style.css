@@ -9,55 +9,12 @@
     .sub-menu-item {
         @apply block p-2 hover: font-medium hover: text-black cursor-pointer border-b-[1px] border-slate-400
     }
-    /* start phần banner */
-    img {
-        @apply align-middle
+
+    .shopee-cart-number-badge {
+        @apply relative rounded-[2.75rem] min-w-[0.6875rem] leading-[1.2em] p-[0.3125rem] top-[-10px]
     }
-    /* .container {
-        @apply relative
-    } */
-    /* .mySlides {
-        @apply hidden
-    } */
-    .image {
-        @apply w-[1440px] h-[520px]
-    }
-    .cursor {
-        @apply cursor-pointer
-    }
-    .prev,
-    .next {
-        @apply cursor-pointer absolute top-[210px] w-auto p-[14px] mt-[-30px] text-white font-bold text-[20px] rounded-r-[3px]
-    }
-    .next {
-        @apply right-0 rounded-l-[3px]
-    }
-    .prev:hover,
-    .next:hover {
-        @apply bg-black
-    }
-    .row::after {
-        @apply content-none table clear-both
-    }
-    .column {
-        @apply w-[160px] h-[80px] float-left
-    }
-    .demo {
-        @apply opacity-60
-    }
-    .active,
-    .demo:hover {
-        @apply opacity-100
-    }
-    /* end banner */
 
     /* css của footer */
-    .footer-tong{
-        @apply bg-[#c16565] h-[500px]
-    }
-    .footer-tong1{
-        @apply max-w-[1440px] mx-auto pt-[20px]
-    }
     .box {
         @apply w-[340px] mr-[25px] p-[10px]
     }
@@ -73,7 +30,7 @@
     .nd {
         @apply text-[15px] my-[5px]
     }
-    .shopee-cart-number-badge {
-        @apply relative rounded-[2.75rem] min-w-[0.6875rem] leading-[1.2em] p-[0.3125rem] top-[-10px]
+    .menu-footer{
+        @apply my-[10px] ml-[15px]
     }
 }

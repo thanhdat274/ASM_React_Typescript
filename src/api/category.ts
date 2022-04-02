@@ -6,7 +6,7 @@ export const listCate = () =>{
     return instance.get(url);
 }
 export const listOneCate = (id: number) =>{
-    const url = `/category/${id}`
+    const url = `/category/${id}/edit`
     return instance.get(url);
 }
 export const remove =(id:number)=>{

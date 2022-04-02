@@ -34,7 +34,7 @@ const EditCate = (props: CateAddProps) => {
             <div className="col-12">
                 <div className="card">
                     <div className="card-header">
-                        <h3 className="card-title m-0">THÊM MỚI DANH MỤC</h3>
+                        <h3 className="card-title m-0">CẬP NHẬT DANH MỤC</h3>
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -47,7 +47,7 @@ const EditCate = (props: CateAddProps) => {
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <label>Tên danh mục <span style={{ color: 'red' }}>*</span> </label>
+                                        <label>Tên sản phẩm<span style={{ color: 'red' }}>*</span> </label>
                                         <input type="text" className="form-control" placeholder="Nhập tên danh mục....."  {...register('name')}/>
                                     </div>
                                 </div>

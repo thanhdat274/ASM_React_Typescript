@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import "./public/client/style.css"
+import './public/client/style.css'
 import AdminLayout from "./admin/layouts/AdminLayout";
 import Dashboard from "./admin/business/Dashboard";
 import WebsiteLayout from "./client/layouts/WebsiteLayout";
@@ -12,6 +12,11 @@ import { add, listCate, remove, update } from "./api/category";
 import { CategoryType } from "./types/category";
 import AddCate from "./admin/business/categroy/AddCate";
 import EditCate from "./admin/business/categroy/EditCate";
+import { ProductType } from "./types/product";
+import { addPro, deletePro, listPro, updatePro } from "./api/products";
+import ListPro from "./admin/business/product/ListPro";
+import AddPro from "./admin/business/product/AddPro";
+import EditPro from "./admin/business/product/EditPro";
 
 function App() {
   // Phần hàm xử lý của client
@@ -44,6 +49,56 @@ function App() {
   }
   // ---------------------------------------------
 
+  // phần product của admin
+  const [product, setProduct] = useState<ProductType[]>([]);
+  useEffect(() => {
+    const getPro = async () => {
+      const { data } = await listPro();
+      setProduct(data);
+    };
+    getPro();
+  }, []);
+  const removePro = async (id: number) => {
+    const {data} = await deletePro(id);
+    if (data) {
+      setProduct(product.filter(item => item._id !== id));
+    }
+  };
+  const ProAdd = async (pro: ProductType) => {
+    const { data } = await addPro(pro);
+    setProduct([...product, data]);
+  };
+  const UpdatePro = async (pro: ProductType) =>{
+    const {data} = await updatePro(pro)
+    setProduct(product.map(item => item._id == data._id ? data : item));
+  }
+  // ---------------------------------------------
+
+  // phần user của admin
+  const [user, setUser] = useState<ProductType[]>([]);
+  useEffect(() => {
+    const getPro = async () => {
+      const { data } = await listPro();
+      setProduct(data);
+    };
+    getPro();
+  }, []);
+  // const removePro = async (id: number) => {
+  //   const {data} = await deletePro(id);
+  //   if (data) {
+  //     setProduct(product.filter(item => item._id !== id));
+  //   }
+  // };
+  // const ProAdd = async (pro: ProductType) => {
+  //   const { data } = await addPro(pro);
+  //   setProduct([...product, data]);
+  // };
+  // const UpdatePro = async (pro: ProductType) =>{
+  //   const {data} = await updatePro(pro)
+  //   setProduct(product.map(item => item._id == data._id ? data : item));
+  // }
+  // ---------------------------------------------
+
   // ---------------------------------------------
 
   return (
@@ -59,6 +114,18 @@ function App() {
             <Route index element={<ListCate data={category} onRemove={removeCate} />} />
             <Route path="add" element={<AddCate  onAdd={addCate}/>} />
             <Route path=":id/edit" element={<EditCate onUpdate={updateCate}  />} />
+          </Route>
+          
+          <Route path="product">
+            <Route index element={<ListPro data={product} onRemove={removePro} />} />
+            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd}/>} />
+            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro}  />} />
+          </Route>
+
+          <Route path="user">
+            <Route index element={<ListPro data={product} onRemove={removePro} />} />
+            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd}/>} />
+            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro}  />} />
           </Route>
         </Route>
       </Routes>
