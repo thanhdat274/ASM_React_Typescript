@@ -27,7 +27,8 @@ const ListCate = (props: ListCate) => {
                     <div className="card-body">
                         <table className="table tabl-stripped">
                             <thead>
-                                <tr><th>ID</th>
+                                <tr>
+                                    <th>ID</th>
                                     <th>Danh mục</th>
                                     <th colSpan={2}>Action</th>
                                     <th>

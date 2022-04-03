@@ -50,8 +50,8 @@ const AddPro = (props: ProAddProps) => {
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <label>Tên danh mục <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="text" className="form-control" placeholder="Nhập tên danh mục....."  {...register('name')} />
+                                        <label>Tên sản phẩm <span style={{ color: 'red' }}>*</span> </label>
+                                        <input type="text" className="form-control" placeholder="Nhập tên sản phẩm....."  {...register('name')} />
                                     </div>
                                 </div>
                             </div>
