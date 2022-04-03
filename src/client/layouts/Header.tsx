@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { CategoryType } from '../../types/category';
 
-type Props = {}
+type ListCate = {
+  data: CategoryType[];
+}
 
-const Header = (props: Props) => {
+const Header = (props: ListCate) => {
   return (
     <div>
       <div className="bg-white h-[50px] mb-[10px]">
@@ -29,7 +32,7 @@ const Header = (props: Props) => {
                 037.462.9999 - 096.539.7966</span></p>
             </div>
             <div className="grid grid-cols-1 mx-auto">
-             <ul className="flex">
+              <ul className="flex">
                 <li className="mx-4"><Link to="/signup">Đăng ký</Link></li>
                 <li className="mx-4 text-[#f1aa0c]"><Link to={'#'}>|</Link></li>
                 <li className="mx-4"><Link to="/signin">Đăng nhập</Link></li>
@@ -70,6 +73,9 @@ const Header = (props: Props) => {
             <nav className="">
               <ul className="flex h-[50px] py-2">
                 <li><Link to="/" className="menu-item">Trang chủ</Link></li>
+                {props.data && props.data.map((item, index) => {
+                  return <li><Link to={`/category/${item._id}`} className="menu-item">{item.name}</Link></li>
+                })}
                 <li><Link to="/blog" className="menu-item">Tin tức công nghệ</Link></li>
                 <li><Link to="/" className="menu-item">Liên hệ</Link></li>
               </ul>

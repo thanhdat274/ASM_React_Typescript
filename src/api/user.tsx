@@ -21,3 +21,12 @@ export const updateUser = (use: UserType) => {
     const url = `/user/${use._id}` 
     return instance.put(url, use);
 }
+
+export const signup = (user: {}) => {
+    const url = `/signup`;
+    return instance.post(url, user);
+}
+export const signin = (user: {}) => {
+    const url = `/signin`;
+    return instance.post(url, user);
+}

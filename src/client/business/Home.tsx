@@ -18,10 +18,10 @@ const Home = (props: ListPro) => {
             <div className="grid grid-cols-5 gap-8">
               {props.data && props.data.map((item, index) => {
                 return <div className="border p-3">
-                  <Link to="/products/${product.id}">
+                  <Link to={`/product/${item._id}`}>
                     <img src={item.img} className="w-[250px] h-[250px]" />
                   </Link>
-                  <h3 className="my-3"><Link to="/products/${product.id}" className="font-semibold text-lg ">{item.name}</Link></h3>
+                  <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-lg ">{item.name}</Link></h3>
                   <p className="text-[red] font-semibold text-[16px]">{item.price}</p>
                 </div>
               })}

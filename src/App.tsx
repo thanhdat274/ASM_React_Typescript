@@ -22,6 +22,8 @@ import { addUser, deleteUser, listUser, updateUser } from './api/user';
 import { UserType } from './types/user';
 import AddUser from "./admin/business/user/AddUser";
 import EditUser from './admin/business/user/EditUser';
+import Signup from "./client/business/Signup";
+import Signin from "./client/business/Signin";
 
 function App() {
   // Phần hàm xử lý của client
@@ -114,6 +116,8 @@ function App() {
       <Routes>
         <Route path="/" element={<WebsiteLayout />}>
           <Route index element={<Home data={product} />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="signin" element={<Signin />} />
         </Route>
 
         <Route path="/admin" element={<AdminLayout />}>
