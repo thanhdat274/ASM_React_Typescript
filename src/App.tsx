@@ -18,9 +18,10 @@ import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
 import ListUser from "./admin/business/user/ListUser";
-import { addUser, deleteUser, listUser } from './api/user';
+import { addUser, deleteUser, listUser, updateUser } from './api/user';
 import { UserType } from './types/user';
 import AddUser from "./admin/business/user/AddUser";
+import EditUser from './admin/business/user/EditUser';
 
 function App() {
   // Phần hàm xử lý của client
@@ -100,10 +101,10 @@ function App() {
     const { data } = await addUser(use);
     setUser([...user, data]);
   };
-  // const UpdatePro = async (pro: ProductType) =>{
-  //   const {data} = await updatePro(pro)
-  //   setProduct(product.map(item => item._id == data._id ? data : item));
-  // }
+  const UpdateUser = async (use: UserType) =>{
+    const {data} = await updateUser(use)
+    setUser(user.map(item => item._id == data._id ? data : item));
+  }
   // ---------------------------------------------
 
   // ---------------------------------------------
@@ -132,7 +133,7 @@ function App() {
           <Route path="user">
             <Route index element={<ListUser data={user} onRemove={removeUser} />} />
             <Route path="add" element={<AddUser onAdd={UserAdd} />} />
-            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro} />} />
+            <Route path=":id/edit" element={<EditUser onUpdate={UpdateUser} />} />
           </Route>
         </Route>
       </Routes>

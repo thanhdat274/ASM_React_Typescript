@@ -20,15 +20,15 @@ type FormValues = {
 }
 
 const AddUser = (props: UserAddProps) => {
-  const {register, handleSubmit, watch, formState: {errors}} = useForm<FormValues>();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
   const navigate = useNavigate();
-  const onSubmit: SubmitHandler<FormValues> = data =>{
+  const onSubmit: SubmitHandler<FormValues> = data => {
     props.onAdd(data)
     toastr.success("Thêm mới thành công, chuyển trang sau 2s");
     setTimeout(() => {
-        navigate('/admin/user')
+      navigate('/admin/user')
     }, 2000);
-   
+
   }
   return (
     <div className="row">
@@ -49,7 +49,7 @@ const AddUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>EMAIL <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="email" className="form-control" placeholder="Nhập email....." {...register('email')}/>
+                    <input type="email" className="form-control" placeholder="Nhập email....." {...register('email')} />
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@ const AddUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>MẬT KHẨU <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="password" className="form-control" placeholder="Nhập mật khẩu....." {...register('password')}/>
+                    <input type="password" className="form-control" placeholder="Nhập mật khẩu....." {...register('password')} />
                   </div>
                 </div>
                 <div className="col-sm-6">
@@ -71,13 +71,13 @@ const AddUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>ĐỊA CHỈ <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="text" className="form-control" placeholder="Nhập địa chỉ....." {...register('address')}/>
+                    <input type="text" className="form-control" placeholder="Nhập địa chỉ....." {...register('address')} />
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>SỐ ĐIỆN THOẠI <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="phone" className="form-control" placeholder="Nhập số điện thoại....." {...register('phone')}/>
+                    <input type="phone" className="form-control" placeholder="Nhập số điện thoại....." {...register('phone')} />
                   </div>
                 </div>
               </div>
@@ -92,11 +92,11 @@ const AddUser = (props: UserAddProps) => {
                 </div>
                 <div className="col-sm-6">
                   <div className="form-group">
-                    <label>VAI TRÒ <span style={{ color: 'red' }}>*</span> </label>
-                    <div className="custom-control custom-radio form-control">
-                      <label><input {...register('role')} defaultValue={0} type="radio" />&nbsp;Khách hàng</label>&nbsp;&nbsp;&nbsp;
-                      <label><input {...register('role')} defaultValue={1} type="radio" defaultChecked />&nbsp;Nhân viên</label>
-                    </div>
+                    <label>Danh mục</label>
+                    <select className="form-control" {...register('role')}>
+                          <option value={0}>Khách hàng</option>
+                          <option value={1}>Nhân viên</option>
+                    </select>
                   </div>
                 </div>
               </div>
