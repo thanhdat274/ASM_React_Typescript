@@ -5,6 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { listCate } from '../../../api/category';
 import { CategoryType } from '../../../types/category';
+import toastr from 'toastr'
+import "toastr/build/toastr.min.css";
 
 type ProAddProps = {
     cate: CategoryType[];
@@ -30,7 +32,11 @@ const AddPro = (props: ProAddProps) => {
     }, []);
     const onSubmit: SubmitHandler<FormValues> = data => {
         props.onAdd(data);
-        navigate('/admin/product')
+        toastr.success("Thêm mới thành công, chuyển trang sau 2s");
+        setTimeout(() => {
+            navigate('/admin/product')
+        }, 2000);
+       
     }
     return (
         <div className="row">

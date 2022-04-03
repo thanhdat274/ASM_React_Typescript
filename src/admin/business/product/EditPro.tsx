@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { CategoryType } from '../../../types/category';
 import { listCate } from '../../../api/category';
 import { listOnePro } from '../../../api/products';
+import toastr from 'toastr'
+import "toastr/build/toastr.min.css";
 
 type ProEditProps = {
     cate: CategoryType[];
@@ -41,7 +43,10 @@ const EditPro = (props: ProEditProps) => {
     },[])
     const onSubmit: SubmitHandler<FormValues> = data => {
         props.onUpdate(data);
-        navigate('/admin/product')
+        toastr.success("Cập nhật thành công, chuyển trang sau 2s");
+        setTimeout(() => {
+            navigate('/admin/product')
+        }, 2000);
     }
   return (
     <div className="row">

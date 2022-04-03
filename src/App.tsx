@@ -18,7 +18,7 @@ import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
 import ListUser from "./admin/business/user/ListUser";
-import { listUser } from './api/user';
+import { deleteUser, listUser } from './api/user';
 import { UserType } from './types/user';
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
     getCate();
   }, []);
   const removeCate = async (id: number) => {
-    const {data} = await remove(id);
+    const { data } = await remove(id);
     if (data) {
       setCategory(category.filter(item => item._id !== id));
     }
@@ -46,8 +46,8 @@ function App() {
     const { data } = await add(cate);
     setCategory([...category, data]);
   };
-  const updateCate = async (cate: CategoryType) =>{
-    const {data} = await update(cate)
+  const updateCate = async (cate: CategoryType) => {
+    const { data } = await update(cate)
     setCategory(category.map(item => item._id == data._id ? data : item));
   }
   // ---------------------------------------------
@@ -62,7 +62,7 @@ function App() {
     getPro();
   }, []);
   const removePro = async (id: number) => {
-    const {data} = await deletePro(id);
+    const { data } = await deletePro(id);
     if (data) {
       setProduct(product.filter(item => item._id !== id));
     }
@@ -71,8 +71,8 @@ function App() {
     const { data } = await addPro(pro);
     setProduct([...product, data]);
   };
-  const UpdatePro = async (pro: ProductType) =>{
-    const {data} = await updatePro(pro)
+  const UpdatePro = async (pro: ProductType) => {
+    const { data } = await updatePro(pro)
     setProduct(product.map(item => item._id == data._id ? data : item));
   }
   // ---------------------------------------------
@@ -86,12 +86,16 @@ function App() {
     };
     getUser();
   }, []);
-  // const removePro = async (id: number) => {
-  //   const {data} = await deletePro(id);
-  //   if (data) {
-  //     setProduct(product.filter(item => item._id !== id));
-  //   }
-  // };
+  const removeUser = async (id: number) => {
+    const confirm = window.confirm("Bạn có chắc chắn không??");
+    if (confirm) {
+      const { data } = await deleteUser(id);
+      if (data) {
+        setUser(user.filter(item => item._id !== id));
+      }
+    }
+
+  };
   // const ProAdd = async (pro: ProductType) => {
   //   const { data } = await addPro(pro);
   //   setProduct([...product, data]);
@@ -115,20 +119,20 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="category">
             <Route index element={<ListCate data={category} onRemove={removeCate} />} />
-            <Route path="add" element={<AddCate  onAdd={addCate}/>} />
-            <Route path=":id/edit" element={<EditCate onUpdate={updateCate}  />} />
+            <Route path="add" element={<AddCate onAdd={addCate} />} />
+            <Route path=":id/edit" element={<EditCate onUpdate={updateCate} />} />
           </Route>
-          
+
           <Route path="product">
             <Route index element={<ListPro data={product} onRemove={removePro} />} />
-            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd}/>} />
-            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro}  />} />
+            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd} />} />
+            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro} />} />
           </Route>
 
           <Route path="user">
-            <Route index element={<ListUser data={user} onRemove={removePro} />} />
-            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd}/>} />
-            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro}  />} />
+            <Route index element={<ListUser data={user} onRemove={removeUser} />} />
+            <Route path="add" element={<AddPro cate={category} onAdd={ProAdd} />} />
+            <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro} />} />
           </Route>
         </Route>
       </Routes>

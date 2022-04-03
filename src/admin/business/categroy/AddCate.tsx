@@ -2,6 +2,8 @@ import React from 'react'
 import { CategoryType } from '../../../types/category';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
+import toastr from 'toastr'
+import "toastr/build/toastr.min.css";
 
 type CateAddProps = {
     onAdd: (cate: CategoryType) => void
@@ -16,7 +18,10 @@ const AddCate = (props: CateAddProps) => {
     const navigate = useNavigate();
     const onSubmit: SubmitHandler<FromValues> = data => {
         props.onAdd(data);
-        navigate('/admin/category')
+        toastr.success("Thêm mới thành công, chuyển trang sau 2s");
+        setTimeout(() => {
+             navigate('/admin/category')
+        }, 2000);
     }
     return (
         <div className="row">
@@ -45,7 +50,7 @@ const AddCate = (props: CateAddProps) => {
                             <div className="d-flex justify-content-end">
                                 <Link to="/admin/category" className="btn btn-sm btn-danger">Hủy</Link>
                                 &nbsp;
-                                <button type="submit" className="btn btn-sm btn-primary">Lưu</button>
+                                <button className="btn btn-sm btn-primary">Lưu</button>
                             </div>
                         </form>
                     </div>

@@ -3,6 +3,8 @@ import { CategoryType } from '../../../types/category';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { listOneCate } from '../../../api/category';
+import toastr from 'toastr'
+import "toastr/build/toastr.min.css";
 
 type CateAddProps = {
     onUpdate: (cate: CategoryType) => void
@@ -27,7 +29,10 @@ const EditCate = (props: CateAddProps) => {
 
     const onSubmit: SubmitHandler<FromValues> = data => {
         props.onUpdate(data);
-        navigate('/admin/category')
+        toastr.success("Cập nhật thành công, chuyển trang sau 2s");
+        setTimeout(() => {
+            navigate('/admin/category')
+        }, 2000);
     }
     return (
         <div className="row">
