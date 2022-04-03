@@ -1,15 +1,15 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ProductType } from '../../../types/product'
 
 type ListPro = {
     data: ProductType[];
-    onRemove: (id: number)=>void
+    onRemove: (id: number) => void
 }
 
 const ListPro = (props: ListPro) => {
-  return (
-    <div className="row">
+    return (
+        <div className="row">
             <div className="col-12">
                 <div className="card">
                     <div className="card-header">
@@ -27,7 +27,8 @@ const ListPro = (props: ListPro) => {
                     <div className="card-body">
                         <table className="table tabl-stripped">
                             <thead>
-                                <tr><th>ID</th>
+                                <tr>
+                                    <th>ID</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Giá sản phẩm</th>
                                     <th>Số lượng sản phẩm</th>
@@ -60,7 +61,7 @@ const ListPro = (props: ListPro) => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default ListPro

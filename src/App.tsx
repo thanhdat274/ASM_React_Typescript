@@ -17,6 +17,9 @@ import { addPro, deletePro, listPro, updatePro } from "./api/products";
 import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
+import ListUser from "./admin/business/user/ListUser";
+import { listUser } from './api/user';
+import { UserType } from './types/user';
 
 function App() {
   // Phần hàm xử lý của client
@@ -75,13 +78,13 @@ function App() {
   // ---------------------------------------------
 
   // phần user của admin
-  const [user, setUser] = useState<ProductType[]>([]);
+  const [user, setUser] = useState<UserType[]>([]);
   useEffect(() => {
-    const getPro = async () => {
-      const { data } = await listPro();
-      setProduct(data);
+    const getUser = async () => {
+      const { data } = await listUser();
+      setUser(data);
     };
-    getPro();
+    getUser();
   }, []);
   // const removePro = async (id: number) => {
   //   const {data} = await deletePro(id);
@@ -123,7 +126,7 @@ function App() {
           </Route>
 
           <Route path="user">
-            <Route index element={<ListPro data={product} onRemove={removePro} />} />
+            <Route index element={<ListUser data={user} onRemove={removePro} />} />
             <Route path="add" element={<AddPro cate={category} onAdd={ProAdd}/>} />
             <Route path=":id/edit" element={<EditPro cate={category} onUpdate={UpdatePro}  />} />
           </Route>
