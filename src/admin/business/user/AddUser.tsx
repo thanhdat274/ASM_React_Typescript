@@ -4,6 +4,8 @@ import { UserType } from '../../../types/user'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import toastr from 'toastr'
 import "toastr/build/toastr.min.css";
+import axios from 'axios';
+import { useState } from 'react';
 
 type UserAddProps = {
   onAdd: (use: UserType) => void
@@ -16,13 +18,29 @@ type FormValues = {
   password: string,
   phone: string,
   address: string,
+  img: string,
   role: number
 }
 
 const AddUser = (props: UserAddProps) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
   const navigate = useNavigate();
-  const onSubmit: SubmitHandler<FormValues> = data => {
+  const [image, setImage] = useState("");
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const CLOUDINARY_PRESET_KEY = "js8yqruv";
+    const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+
+    if (image) {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
+      const img = await axios.post(CLOUDINARY_API_URL, formData, {
+        headers: {
+          "Content-Type": "application/form-data",
+        },
+      });
+      data.img = img.data.url;
+    }
     props.onAdd(data)
     toastr.success("Thêm mới thành công, chuyển trang sau 2s");
     setTimeout(() => {
@@ -86,7 +104,7 @@ const AddUser = (props: UserAddProps) => {
                   <div className="form-group">
                     <label>HÌNH ẢNH <span style={{ color: 'red' }}>*</span> </label>
                     <div className="form-control">
-                      <input type="file" name="image" placeholder="Nhập hình ảnh....." />
+                      <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} placeholder="Nhập hình ảnh....." />
                     </div>
                   </div>
                 </div>
@@ -94,8 +112,8 @@ const AddUser = (props: UserAddProps) => {
                   <div className="form-group">
                     <label>Danh mục</label>
                     <select className="form-control" {...register('role')}>
-                          <option value={0}>Khách hàng</option>
-                          <option value={1}>Nhân viên</option>
+                      <option value={0}>Khách hàng</option>
+                      <option value={1}>Nhân viên</option>
                     </select>
                   </div>
                 </div>

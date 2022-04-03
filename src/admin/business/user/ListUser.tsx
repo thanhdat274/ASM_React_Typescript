@@ -33,6 +33,7 @@ const ListUser = (props: ListUser) => {
                   <th>HỌ VÀ TÊN</th>
                   <th>ĐỊA CHỈ</th>
                   <th>SỐ ĐIỆN THOẠI</th>
+                  <th>SỐ ĐIỆN THOẠI</th>
                   <th>VAI TRÒ</th>
                   <th colSpan={2}>Action</th>
                   <th>
@@ -46,6 +47,7 @@ const ListUser = (props: ListUser) => {
                     <td>{index + 1}</td>
                     <td>{item.email}</td>
                     <td>{item.name}</td>
+                    <td><img src={item.img} alt="" width={250} height={150} /></td>
                     <td>{item.address}</td>
                     <td>{item.phone}</td>
                     <td>{item.role == 1 ? 'Nhân viên' : 'Khách hàng'}</td>

@@ -1,10 +1,30 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import Banner from '../layouts/Banner'
 
 type Props = {}
 
 const Home = (props: Props) => {
   return (
-    <div>Home</div>
+    <div>
+      <main className="mt-[10px]">
+        <Banner />
+        <div className="max-w-[1440px] mx-auto">
+          <div className="my-[20px]">
+            <h2 className="font-semibold text-2xl uppercase my-[30px] text-center">Tất cả Sản phẩm</h2>
+            <div className="grid grid-cols-5 gap-8">
+              <div className="border p-3">
+                <Link to="/products/${product.id}">
+                  <img src="${product.img}" className="w-[250px] h-[250px]" />
+                </Link>
+                <h3 className="my-3"><Link to="/products/${product.id}" className="font-semibold text-lg ">${'{'}product.name{'}'}</Link></h3>
+                <p className="text-[red] font-semibold text-[16px]">ahihi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   )
 }
 

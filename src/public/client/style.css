@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
     .menu-item {
         @apply mx-5 leading-[35px] inline-block
@@ -9,11 +8,12 @@
     .sub-menu-item {
         @apply block p-2 hover: font-medium hover: text-black cursor-pointer border-b-[1px] border-slate-400
     }
-
     .shopee-cart-number-badge {
         @apply relative rounded-[2.75rem] min-w-[0.6875rem] leading-[1.2em] p-[0.3125rem] top-[-10px]
     }
-
+    .image1 {
+        @apply w-[1440px] h-[520px]
+    }
     /* css của footer */
     .box {
         @apply w-[340px] mr-[25px] p-[10px]
@@ -30,7 +30,7 @@
     .nd {
         @apply text-[15px] my-[5px]
     }
-    .menu-footer{
+    .menu-footer {
         @apply my-[10px] ml-[15px]
     }
 }

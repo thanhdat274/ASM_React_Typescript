@@ -7,6 +7,7 @@ import { listCate } from '../../../api/category';
 import { CategoryType } from '../../../types/category';
 import toastr from 'toastr'
 import "toastr/build/toastr.min.css";
+import axios from 'axios';
 
 type ProAddProps = {
     cate: CategoryType[];
@@ -17,12 +18,14 @@ type FormValues = {
     name: string,
     price: number,
     quantity: number,
+    img: string,
     desc: string,
     categoryId: number
 }
 const AddPro = (props: ProAddProps) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
     const navigate = useNavigate();
+    const [image, setImage] = useState("");
     const [category, setCategory] = useState<CategoryType[]>([]);
     useEffect(() => {
         const getCate = async () => {
@@ -31,13 +34,27 @@ const AddPro = (props: ProAddProps) => {
         };
         getCate();
     }, []);
-    const onSubmit: SubmitHandler<FormValues> = data => {
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        const CLOUDINARY_PRESET_KEY = "js8yqruv";
+        const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+
+        if (image) {
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
+            const img = await axios.post(CLOUDINARY_API_URL, formData, {
+                headers: {
+                    "Content-Type": "application/form-data",
+                },
+            });
+            data.img = img.data.url;
+        }
         props.onAdd(data);
         toastr.success("Thêm mới thành công, chuyển trang sau 2s");
         setTimeout(() => {
             navigate('/admin/product')
         }, 2000);
-       
+
     }
     return (
         <div className="row">
@@ -92,21 +109,17 @@ const AddPro = (props: ProAddProps) => {
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <label>MÔ TẢ <span style={{ color: 'red' }}>*</span></label>
-                                        <textarea className="form-control" rows={3} placeholder="Mô tả sản phẩm..." defaultValue={""} {...register('desc')} />
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label>ẢNH 4 <span style={{ color: 'red' }}>*</span> </label>
+                                        <label>Hình ảnh <span style={{ color: 'red' }}>*</span> </label>
                                         <input type="file" className="form-control" {...register('img')} />
                                     </div>
                                 </div>
-                            </div> */}
-
-
+                            </div>
+                            <div className="row">
+                                <div className="form-group">
+                                    <label>MÔ TẢ <span style={{ color: 'red' }}>*</span></label>
+                                    <textarea className="form-control" rows={6} placeholder="Mô tả sản phẩm..." defaultValue={""} {...register('desc')} />
+                                </div>
+                            </div>
                             <br />
                             <div className="d-flex justify-content-end">
                                 <Link to="/admin/category" className="btn btn-sm btn-danger">Hủy</Link>
