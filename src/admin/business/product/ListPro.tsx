@@ -13,7 +13,7 @@ const ListPro = (props: ListPro) => {
             <div className="col-12">
                 <div className="card">
                     <div className="card-header">
-                        <h2 className="card-title">Danh sách danh mục</h2><br /><br />
+                        <h2 className="card-title uppercase">Danh sách sản phẩm</h2><br /><br />
                         <form>
                             <div className="row">
                                 <div className="col-6">
