@@ -31,8 +31,8 @@ const ListUser = (props: ListUser) => {
                   <th>ID</th>
                   <th>ĐỊA CHỈ EMAIL</th>
                   <th>HỌ VÀ TÊN</th>
+                  <th>HÌNH ẢNH</th>
                   <th>ĐỊA CHỈ</th>
-                  <th>SỐ ĐIỆN THOẠI</th>
                   <th>SỐ ĐIỆN THOẠI</th>
                   <th>VAI TRÒ</th>
                   <th colSpan={2}>Action</th>

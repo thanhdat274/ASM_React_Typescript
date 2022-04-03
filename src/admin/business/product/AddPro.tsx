@@ -110,7 +110,7 @@ const AddPro = (props: ProAddProps) => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label>Hình ảnh <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="file" className="form-control" {...register('img')} />
+                                        <input type="file" className="form-control"  onChange={(e) => { setImage(e.target.files[0]) }}  />
                                     </div>
                                 </div>
                             </div>

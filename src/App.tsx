@@ -113,7 +113,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<WebsiteLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Home data={product} />} />
         </Route>
 
         <Route path="/admin" element={<AdminLayout />}>

@@ -4,8 +4,9 @@ import { UserType } from '../../../types/user'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import toastr from 'toastr'
 import "toastr/build/toastr.min.css";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { listOneUser } from '../../../api/user';
+import axios from 'axios';
 
 type UserAddProps = {
   onUpdate: (use: UserType) => void
@@ -22,25 +23,39 @@ type FormValues = {
 }
 
 const EditUser = (props: UserAddProps) => {
-  const {id} = useParams();
-  const {register, handleSubmit, formState: {errors}, reset} = useForm<FormValues>();
+  const { id } = useParams();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
   const navigate = useNavigate();
-
-  useEffect(()=>{
-    const getUser = async()=>{
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    const getUser = async () => {
       const { data } = await listOneUser(id)
       reset(data)
     }
     getUser();
-  },[])
+  }, [])
 
-  const onSubmit: SubmitHandler<FormValues> = data =>{
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const CLOUDINARY_PRESET_KEY = "js8yqruv";
+    const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+
+    if (image) {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
+      const img = await axios.post(CLOUDINARY_API_URL, formData, {
+        headers: {
+          "Content-Type": "application/form-data",
+        },
+      });
+      data.img = img.data.url;
+    }
     props.onUpdate(data)
     toastr.success("Cập nhật thành công, chuyển trang sau 2s");
     setTimeout(() => {
-        navigate('/admin/user')
+      navigate('/admin/user')
     }, 2000);
-   
+
   }
   return (
     <div className="row">
@@ -61,7 +76,7 @@ const EditUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>EMAIL <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="email" className="form-control" placeholder="Nhập email....." {...register('email')}/>
+                    <input type="email" className="form-control" placeholder="Nhập email....." {...register('email')} />
                   </div>
                 </div>
               </div>
@@ -69,7 +84,7 @@ const EditUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>MẬT KHẨU <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="password" className="form-control" placeholder="Nhập mật khẩu....." {...register('password')}/>
+                    <input type="password" className="form-control" placeholder="Nhập mật khẩu....." {...register('password')} />
                   </div>
                 </div>
                 <div className="col-sm-6">
@@ -83,13 +98,13 @@ const EditUser = (props: UserAddProps) => {
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>ĐỊA CHỈ <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="text" className="form-control" placeholder="Nhập địa chỉ....." {...register('address')}/>
+                    <input type="text" className="form-control" placeholder="Nhập địa chỉ....." {...register('address')} />
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="form-group">
                     <label>SỐ ĐIỆN THOẠI <span style={{ color: 'red' }}>*</span> </label>
-                    <input type="phone" className="form-control" placeholder="Nhập số điện thoại....." {...register('phone')}/>
+                    <input type="phone" className="form-control" placeholder="Nhập số điện thoại....." {...register('phone')} />
                   </div>
                 </div>
               </div>
@@ -98,7 +113,7 @@ const EditUser = (props: UserAddProps) => {
                   <div className="form-group">
                     <label>HÌNH ẢNH <span style={{ color: 'red' }}>*</span> </label>
                     <div className="form-control">
-                      <input type="file" name="image" placeholder="Nhập hình ảnh....." />
+                      <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} placeholder="Nhập hình ảnh....." />
                     </div>
                   </div>
                 </div>
@@ -106,8 +121,8 @@ const EditUser = (props: UserAddProps) => {
                   <div className="form-group">
                     <label>Danh mục</label>
                     <select className="form-control" {...register('role')}>
-                          <option value={0}>Khách hàng</option>
-                          <option value={1}>Nhân viên</option>
+                      <option value={0}>Khách hàng</option>
+                      <option value={1}>Nhân viên</option>
                     </select>
                   </div>
                 </div>

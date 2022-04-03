@@ -26,10 +26,11 @@ const ListPro = (props: ListPro) => {
                     </div>
                     <div className="card-body">
                         <table className="table tabl-stripped">
-                            <thead>
+                            <thead className='uppercase'>
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Hình ảnh</th>
                                     <th>Giá sản phẩm</th>
                                     <th>Số lượng sản phẩm</th>
                                     <th>Mô tả sản phẩm</th>
@@ -44,6 +45,7 @@ const ListPro = (props: ListPro) => {
                                     return <tr key={index}>
                                         <td>{index + 1}</td>
                                         <td>{item.name}</td>
+                                        <td><img src={item.img} alt="" width={250} height={150} /></td>
                                         <td>{item.price}</td>
                                         <td>{item.quantity}</td>
                                         <td>{item.desc}</td>
