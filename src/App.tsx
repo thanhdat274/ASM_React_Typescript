@@ -24,6 +24,7 @@ import AddUser from "./admin/business/user/AddUser";
 import EditUser from './admin/business/user/EditUser';
 import Signup from "./client/business/Signup";
 import Signin from "./client/business/Signin";
+import PrivateRouter from "./admin/layouts/PrivateRouter";
 
 function App() {
   // Phần hàm xử lý của client
@@ -120,7 +121,7 @@ function App() {
           <Route path="signin" element={<Signin />} />
         </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
           <Route index element={<Dashboard />} />
           <Route path="category">
             <Route index element={<ListCate data={category} onRemove={removeCate} />} />

@@ -14,7 +14,7 @@ export const deletePro =(id:number)=>{
     return instance.delete(url)
 }
 export const addPro = (pro: ProductType) =>{
-    const url = '/products'
+    const url = `/products`
     return instance.post(url, pro);
 }
 export const updatePro = (pro: ProductType) => {
