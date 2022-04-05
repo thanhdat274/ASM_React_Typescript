@@ -6,13 +6,13 @@ export const listCate = () =>{
     return instance.get(url);
 }
 export const listOneCate = (id: number) =>{
-    const url = `/category/${id}/edit`
-    return instance.get(url);
-}
-export const listCateAndPro = (id: number) =>{
     const url = `/category/${id}`
     return instance.get(url);
 }
+// export const listCateAndPro = (id: number) =>{
+//     const url = `/category/${id}?_embed=products`
+//     return instance.get(url);
+// }
 export const remove =(id:number)=>{
     const url = `/category/${id}`
     return instance.delete(url)

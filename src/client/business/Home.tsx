@@ -5,9 +5,14 @@ import Banner from '../layouts/Banner'
 
 type ListPro = {
   data: ProductType[];
+  onListPro: () => void
 }
 
 const Home = (props: ListPro) => {
+  const getPro = async () => {
+    props.onListPro();
+  }
+  getPro();
   return (
     <div>
       <main className="mt-[10px]">

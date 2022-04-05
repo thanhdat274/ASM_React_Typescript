@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import axios from "axios";
 import './public/client/style.css'
 import AdminLayout from "./admin/layouts/AdminLayout";
@@ -8,12 +8,12 @@ import Dashboard from "./admin/business/Dashboard";
 import WebsiteLayout from "./client/layouts/WebsiteLayout";
 import Home from "./client/business/Home";
 import ListCate from "./admin/business/categroy/ListCate";
-import { add, listCate, remove, update } from "./api/category";
+import { add, listCate, remove, update } from './api/category';
 import { CategoryType } from "./types/category";
 import AddCate from "./admin/business/categroy/AddCate";
 import EditCate from "./admin/business/categroy/EditCate";
 import { ProductType } from "./types/product";
-import { addPro, deletePro, listPro, updatePro } from "./api/products";
+import { addPro, deletePro, listPro, updatePro, listCateAndPro } from './api/products';
 import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
@@ -25,10 +25,22 @@ import EditUser from './admin/business/user/EditUser';
 import Signup from "./client/business/Signup";
 import Signin from "./client/business/Signin";
 import PrivateRouter from "./admin/layouts/PrivateRouter";
+import ProductList from "./client/business/product/ProductList";
+import ProductDetail from "./client/business/product/ProductDetail";
 
 function App() {
   // Phần hàm xử lý của client
-
+  const [product, setProduct] = useState<ProductType[]>([]);
+  const ListCateAndPro = async (id: number) => {
+    const { data } = await listCateAndPro(id)
+    setProduct(data.product);
+    console.log(data);
+  }
+  const ListProduct = async () => {
+    const { data } = await listPro()
+    setProduct(data);
+    console.log(data);
+  }
   // ---------------------------------------------
 
   // phần hàm sử lý của admin
@@ -58,7 +70,7 @@ function App() {
   // ---------------------------------------------
 
   // phần product của admin
-  const [product, setProduct] = useState<ProductType[]>([]);
+  // const [product, setProduct] = useState<ProductType[]>([]);
   useEffect(() => {
     const getPro = async () => {
       const { data } = await listPro();
@@ -104,8 +116,8 @@ function App() {
     const { data } = await addUser(use);
     setUser([...user, data]);
   };
-  const UpdateUser = async (use: UserType) =>{
-    const {data} = await updateUser(use)
+  const UpdateUser = async (use: UserType) => {
+    const { data } = await updateUser(use)
     setUser(user.map(item => item._id == data._id ? data : item));
   }
   // ---------------------------------------------
@@ -116,9 +128,11 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<WebsiteLayout />}>
-          <Route index element={<Home data={product} />} />
+          <Route index element={<Home data={product} onListPro={ListProduct} />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
+          <Route path="category/:id" element={<ProductList onList={ListCateAndPro} data={product} />} />
+          <Route path="product/:id" element={<ProductDetail />} />
         </Route>
 
         <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
