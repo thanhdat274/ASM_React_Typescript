@@ -29,8 +29,8 @@ const Home = (props: ListPro) => {
                   <Link to={`/product/${item._id}`}>
                     <img src={item.img} className="w-[250px] h-[250px]" />
                   </Link>
-                  <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-lg ">{item.name}</Link></h3>
-                  <p className="text-[red] font-semibold text-[16px]">{item.price}</p>
+                  <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-[18px] ">{item.name}</Link></h3>
+                  <p className="text-[red] font-semibold text-[17px]">{item.price.toLocaleString()}</p>
                 </div>
               })}
             </div>

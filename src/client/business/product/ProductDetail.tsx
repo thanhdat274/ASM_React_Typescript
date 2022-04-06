@@ -49,8 +49,8 @@ const ProductDetail = (props: ListProDeatil) => {
                                     {props.data.name}
                                 </div>
                                 <div className="text-[#51545f] mb-[20px] w-[460px]">
-                                    <h1 className="text-[21px] font-medium">Thông tin chung:</h1>
-                                    <div className="font-medium text-[16px] break-words">{props.data.desc}</div>
+                                    <h1 className="text-[21px] font-semibold">Thông tin chung:</h1>
+                                    <div className="font-medium text-[16px] break-words mt-[10px]">{props.data.short_desc}</div>
                                 </div>
                                 <div className="text-[#fe4c50] font-semibold text-2xl mb-5">
                                     {props.data.price}
