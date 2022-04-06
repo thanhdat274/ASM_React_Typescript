@@ -49,7 +49,7 @@ const ListPro = (props: ListPro) => {
                                         <td>{item.price.toLocaleString()}</td>
                                         <td>{item.quantity.toLocaleString()}</td>
                                         <td>
-                                            <textarea rows={10} cols={100} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" >{item.desc}</textarea>
+                                            <textarea rows={8} cols={100} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" >{item.desc}</textarea>
                                         </td>
                                         <td>
                                             <Link to={`/admin/product/${item._id}/edit`} className="btn btn-sm btn-info">
