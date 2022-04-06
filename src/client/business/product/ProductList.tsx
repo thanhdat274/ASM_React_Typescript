@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { listCateAndPro, listPro } from '../../../api/products';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ProductType } from '../../../types/product';
 type ListPro = {
     data: ProductType[];
@@ -10,12 +10,12 @@ type ListPro = {
 
 const ProductList = (props: ListPro) => {
     const { id } = useParams();
-    const getPro = async (id: number) => {
-        props.onList(id);
-    }
-    getPro(id);
-    // console.log(props.data);
-
+    useEffect(() => {
+        const getPro = async () => {
+            await props.onList(id);
+        }
+        getPro();
+    }, [id])
     return (
         <div>
             <main className="mt-[10px]">
@@ -37,11 +37,11 @@ const ProductList = (props: ListPro) => {
                     <div className="my-[20px]">
                         <div className="grid grid-cols-5 gap-8">
                             {props.data && props.data.map((item, index) => {
-                                return <div className="border p-3">
-                                    <a href="/products/${posts.id}">
+                                return <div key={index} className="border p-3">
+                                    <Link to={`/product/${item._id}`}>
                                         <img src={item.img} className="w-[250px] h-[250px]" />
-                                    </a>
-                                    <h3 className="my-3"><a href="/products/${posts.id}" className="font-semibold text-lg">{item.name}</a></h3>
+                                    </Link>
+                                    <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-lg">{item.name}</Link></h3>
                                     <p className="text-[red] font-semibold text-[16px]">{item.price}</p>
                                 </div>
                             })}
