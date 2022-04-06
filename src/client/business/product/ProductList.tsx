@@ -45,7 +45,7 @@ const ProductList = (props: ListPro) => {
                                         <img src={item.img} className="w-[250px] h-[250px]" />
                                     </Link>
                                     <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-lg">{item.name}</Link></h3>
-                                    <p className="text-[red] font-semibold text-[16px]">{item.price.toLocaleString()}</p>
+                                    <p className="text-[red] font-semibold text-[16px]">{item.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</p>
                                 </div>
                             })}
                         </div>

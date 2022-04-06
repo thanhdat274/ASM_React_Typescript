@@ -83,7 +83,7 @@ const ProductDetail = (props: ListProDeatil) => {
                         </div>
                         <div className="w-[1080px] my-[20px]">
                             <div className="my-[20px]">
-                                <div className="grid grid-cols-4 gap-8">
+                                {/* <div className="grid grid-cols-4 gap-8">
                                     ${'{'}data2.data.slice(0, 8).map((item) =&gt; {'{'}
                                     if (item.categoryProductId === data.categoryProductId) {'{'}
                                     return `
@@ -97,7 +97,7 @@ const ProductDetail = (props: ListProDeatil) => {
                                     `;
                                     {'}'}
                                     {'}'}).join(""){'}'}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
