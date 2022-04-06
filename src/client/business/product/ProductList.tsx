@@ -39,7 +39,7 @@ const ProductList = (props: ListPro) => {
                     </div>
                     <div className="my-[20px]">
                         <div className="grid grid-cols-5 gap-8">
-                            {props.data.product && props.data.product.map((item, index) => {
+                            {props.data && props.data.map((item, index) => {
                                 return <div key={index} className="border p-3">
                                     <Link to={`/product/${item._id}`}>
                                         <img src={item.img} className="w-[250px] h-[250px]" />

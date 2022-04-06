@@ -6,16 +6,9 @@ import { useEffect } from 'react';
 
 type ListPro = {
   data: ProductType[];
-  onListPro: () => void
 }
 
 const Home = (props: ListPro) => {
-  useEffect(() => {
-    const getPro = async () => {
-      await props.onListPro();
-    }
-    getPro();
-  }, [])
   return (
     <div>
       <main className="mt-[10px]">

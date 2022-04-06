@@ -35,19 +35,23 @@ function App() {
   const [user, setUser] = useState<UserType[]>([]);
 
   // Phần hàm xử lý của client
-  const ListProduct = async () => {
-    const { data } = await listPro()
-    setProduct(data);
-    console.log(data);
-  }
+  useEffect(() => {
+    const ListProduct = async () => {
+      const { data } = await listPro()
+      setPro(data);
+      console.log(data);
+    }
+    ListProduct();
+  },[])
   const ListCateAndPro = async (id: number) => {
     const { data } = await listCateAndPro(id)
-    setPro(data);
+    setPro(data.product);
     console.log(data);
   }
   const ListProDetail = async (id: number) => {
     const { data } = await listOnePro(id)
     setPro(data);
+    console.log(data);
   }
 
   // ---------------------------------------------
@@ -141,7 +145,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<WebsiteLayout />}>
-          <Route index element={<Home data={product} onListPro={ListProduct} />} />
+          <Route index element={<Home data={product} />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="category/:id" element={<ProductList data={pro} onList={ListCateAndPro} />} />
