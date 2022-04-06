@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductType } from '../../types/product';
 import Banner from '../layouts/Banner'
+import { useEffect } from 'react';
 
 type ListPro = {
   data: ProductType[];
@@ -9,10 +10,12 @@ type ListPro = {
 }
 
 const Home = (props: ListPro) => {
-  const getPro = async () => {
-    props.onListPro();
-  }
-  getPro();
+  useEffect(() => {
+    const getPro = async () => {
+      await props.onListPro();
+    }
+    getPro();
+  }, [])
   return (
     <div>
       <main className="mt-[10px]">

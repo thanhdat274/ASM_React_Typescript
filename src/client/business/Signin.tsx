@@ -23,7 +23,7 @@ const Signin = () => {
         authenticate(user, () => navigate('/'))
       }, 2000);
     } catch (error) {
-      toastr.error("Tên tài khoản đã được đăng kí rồi");
+      toastr.error("Tên tài khoản hoặc mật khẩu không đúng!");
     }
 
   }

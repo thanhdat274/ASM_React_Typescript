@@ -14,7 +14,7 @@ const ProductList = (props: ListPro) => {
         props.onList(id);
     }
     getPro(id);
-    console.log(props.data);
+    // console.log(props.data);
 
     return (
         <div>
@@ -31,6 +31,7 @@ const ProductList = (props: ListPro) => {
                             <i className="fa fa-angle-right" aria-hidden="true" />
                         </div>
                         <div className="text-yellow-500 font-semibold">
+                            {props.data.name}
                         </div>
                     </div>
                     <div className="my-[20px]">
@@ -40,8 +41,8 @@ const ProductList = (props: ListPro) => {
                                     <a href="/products/${posts.id}">
                                         <img src={item.img} className="w-[250px] h-[250px]" />
                                     </a>
-                                    <h3 className="my-3"><a href="/products/${posts.id}" className="font-semibold text-lg">${'{'}posts.name{'}'}</a></h3>
-                                    <p className="text-[red] font-semibold text-[16px]">${'{'}posts.price.toLocaleString("vi-VN", {'{'} style: "currency", currency: "VND" {'}'}){'}'}</p>
+                                    <h3 className="my-3"><a href="/products/${posts.id}" className="font-semibold text-lg">{item.name}</a></h3>
+                                    <p className="text-[red] font-semibold text-[16px]">{item.price}</p>
                                 </div>
                             })}
                         </div>

@@ -29,23 +29,27 @@ import ProductList from "./client/business/product/ProductList";
 import ProductDetail from "./client/business/product/ProductDetail";
 
 function App() {
-  // Phần hàm xử lý của client
+  const [category, setCategory] = useState<CategoryType[]>([]);
   const [product, setProduct] = useState<ProductType[]>([]);
-  const ListCateAndPro = async (id: number) => {
-    const { data } = await listCateAndPro(id)
-    setProduct(data.product);
-    console.log(data);
-  }
+  const [pro, setPro] = useState([]);
+  const [user, setUser] = useState<UserType[]>([]);
+
+  // Phần hàm xử lý của client
   const ListProduct = async () => {
     const { data } = await listPro()
     setProduct(data);
     console.log(data);
   }
+  const ListCateAndPro = async (id: number) => {
+    const { data } = await listCateAndPro(id)
+    setPro(data.product);
+    console.log(data);
+  }
+
   // ---------------------------------------------
 
   // phần hàm sử lý của admin
   // phần category của admin
-  const [category, setCategory] = useState<CategoryType[]>([]);
   useEffect(() => {
     const getCate = async () => {
       const { data } = await listCate();
@@ -95,7 +99,6 @@ function App() {
   // ---------------------------------------------
 
   // phần user của admin
-  const [user, setUser] = useState<UserType[]>([]);
   useEffect(() => {
     const getUser = async () => {
       const { data } = await listUser();
@@ -131,7 +134,7 @@ function App() {
           <Route index element={<Home data={product} onListPro={ListProduct} />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
-          <Route path="category/:id" element={<ProductList onList={ListCateAndPro} data={product} />} />
+          <Route path="category/:id" element={<ProductList data={pro} onList={ListCateAndPro} />} />
           <Route path="product/:id" element={<ProductDetail />} />
         </Route>
 
