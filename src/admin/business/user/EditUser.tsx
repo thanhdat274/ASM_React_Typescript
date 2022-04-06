@@ -36,25 +36,29 @@ const EditUser = (props: UserAddProps) => {
   }, [])
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const CLOUDINARY_PRESET_KEY = "js8yqruv";
-    const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+    try {
+      const CLOUDINARY_PRESET_KEY = "js8yqruv";
+      const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
 
-    if (image) {
-      const formData = new FormData();
-      formData.append("file", image);
-      formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
-      const img = await axios.post(CLOUDINARY_API_URL, formData, {
-        headers: {
-          "Content-Type": "application/form-data",
-        },
-      });
-      data.img = img.data.url;
+      if (image) {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
+        const img = await axios.post(CLOUDINARY_API_URL, formData, {
+          headers: {
+            "Content-Type": "application/form-data",
+          },
+        });
+        data.img = img.data.url;
+      }
+      props.onUpdate(data)
+      toastr.success("Cập nhật thành công, chuyển trang sau 2s");
+      setTimeout(() => {
+        navigate('/admin/user')
+      }, 2000);
+    } catch (error) {
+      toastr.error("Cập nhật không thành công!!");
     }
-    props.onUpdate(data)
-    toastr.success("Cập nhật thành công, chuyển trang sau 2s");
-    setTimeout(() => {
-      navigate('/admin/user')
-    }, 2000);
 
   }
   return (

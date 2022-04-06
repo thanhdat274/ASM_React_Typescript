@@ -16,17 +16,17 @@ type FromValues = {
 };
 
 const EditCate = (props: CateAddProps) => {
-    const {id} = useParams();
+    const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FromValues>();
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        const getCate = async()=>{
-            const {data} = await listOneCate(id);
+    useEffect(() => {
+        const getCate = async () => {
+            const { data } = await listOneCate(id);
             reset(data);
         }
         getCate();
-    },[])
+    }, [])
 
     const onSubmit: SubmitHandler<FromValues> = data => {
         props.onUpdate(data);
@@ -54,7 +54,9 @@ const EditCate = (props: CateAddProps) => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label>Tên sản phẩm<span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="text" className="form-control" placeholder="Nhập tên danh mục....."  {...register('name')}/>
+                                        <input type="text" className="form-control" placeholder="Nhập tên danh mục....." {...register('name', { required: true, minLength: 5 })} />
+                                        {errors.name && errors.name.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.name && errors.name.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
                                     </div>
                                 </div>
                             </div>

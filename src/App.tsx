@@ -13,7 +13,7 @@ import { CategoryType } from "./types/category";
 import AddCate from "./admin/business/categroy/AddCate";
 import EditCate from "./admin/business/categroy/EditCate";
 import { ProductType } from "./types/product";
-import { addPro, deletePro, listPro, updatePro, listCateAndPro } from './api/products';
+import { addPro, deletePro, listPro, updatePro, listCateAndPro, listOnePro } from './api/products';
 import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
@@ -42,8 +42,12 @@ function App() {
   }
   const ListCateAndPro = async (id: number) => {
     const { data } = await listCateAndPro(id)
-    setPro(data.product);
+    setPro(data);
     console.log(data);
+  }
+  const ListProDetail = async (id: number) => {
+    const { data } = await listOnePro(id)
+    setPro(data);
   }
 
   // ---------------------------------------------
@@ -58,9 +62,12 @@ function App() {
     getCate();
   }, []);
   const removeCate = async (id: number) => {
-    const { data } = await remove(id);
-    if (data) {
-      setCategory(category.filter(item => item._id !== id));
+    const confirm = window.confirm("Bạn có chắc chắn không??");
+    if (confirm) {
+      const { data } = await remove(id);
+      if (data) {
+        setCategory(category.filter(item => item._id !== id));
+      }
     }
   };
   const addCate = async (cate: CategoryType) => {
@@ -83,9 +90,12 @@ function App() {
     getPro();
   }, []);
   const removePro = async (id: number) => {
-    const { data } = await deletePro(id);
-    if (data) {
-      setProduct(product.filter(item => item._id !== id));
+    const confirm = window.confirm("Bạn có chắc chắn không??");
+    if (confirm) {
+      const { data } = await deletePro(id);
+      if (data) {
+        setProduct(product.filter(item => item._id !== id));
+      }
     }
   };
   const ProAdd = async (pro: ProductType) => {
@@ -135,7 +145,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="category/:id" element={<ProductList data={pro} onList={ListCateAndPro} />} />
-          <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="product/:id" element={<ProductDetail data={pro} onListDetail={ListProDetail} />} />
         </Route>
 
         <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>

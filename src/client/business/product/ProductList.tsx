@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { listCateAndPro, listPro } from '../../../api/products';
 import { Link, useParams } from 'react-router-dom';
 import { ProductType } from '../../../types/product';
+import { listCate } from '../../../api/category';
+import { CategoryType } from '../../../types/category';
 type ListPro = {
     data: ProductType[];
     onList: (id: number) => void
@@ -16,6 +18,7 @@ const ProductList = (props: ListPro) => {
         }
         getPro();
     }, [id])
+
     return (
         <div>
             <main className="mt-[10px]">
@@ -36,7 +39,7 @@ const ProductList = (props: ListPro) => {
                     </div>
                     <div className="my-[20px]">
                         <div className="grid grid-cols-5 gap-8">
-                            {props.data && props.data.map((item, index) => {
+                            {props.data.product && props.data.product.map((item, index) => {
                                 return <div key={index} className="border p-3">
                                     <Link to={`/product/${item._id}`}>
                                         <img src={item.img} className="w-[250px] h-[250px]" />

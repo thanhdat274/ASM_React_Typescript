@@ -20,6 +20,7 @@ type FormValues = {
     quantity: number,
     img: string,
     desc: string,
+    short_desc: string,
     categoryId: number
 }
 const AddPro = (props: ProAddProps) => {
@@ -35,25 +36,29 @@ const AddPro = (props: ProAddProps) => {
         getCate();
     }, []);
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
-        const CLOUDINARY_PRESET_KEY = "js8yqruv";
-        const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
-
-        if (image) {
-            const formData = new FormData();
-            formData.append("file", image);
-            formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
-            const img = await axios.post(CLOUDINARY_API_URL, formData, {
-                headers: {
-                    "Content-Type": "application/form-data",
-                },
-            });
-            data.img = img.data.url;
+        try {
+            const CLOUDINARY_PRESET_KEY = "js8yqruv";
+            const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dvj4wwihv/image/upload";
+    
+            if (image) {
+                const formData = new FormData();
+                formData.append("file", image);
+                formData.append("upload_preset", CLOUDINARY_PRESET_KEY);
+                const img = await axios.post(CLOUDINARY_API_URL, formData, {
+                    headers: {
+                        "Content-Type": "application/form-data",
+                    },
+                });
+                data.img = img.data.url;
+            }
+            props.onAdd(data);
+            toastr.success("Thêm mới thành công, chuyển trang sau 2s");
+            setTimeout(() => {
+                navigate('/admin/product')
+            }, 2000);
+        } catch (error) {
+            toastr.error("Thêm mới không thành công!!");
         }
-        props.onAdd(data);
-        toastr.success("Thêm mới thành công, chuyển trang sau 2s");
-        setTimeout(() => {
-            navigate('/admin/product')
-        }, 2000);
 
     }
     return (
@@ -75,14 +80,16 @@ const AddPro = (props: ProAddProps) => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label>Tên sản phẩm <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="text" className="form-control" placeholder="Nhập tên sản phẩm....."  {...register('name')} />
+                                        <input type="text" className="form-control" placeholder="Nhập tên sản phẩm....."  {...register('name', { required: true, minLength: 5 })} />
+                                        {errors.name && errors.name.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.name && errors.name.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <label>Danh mục</label>
+                                        <label>Danh mục <span style={{ color: 'red' }}>*</span></label>
                                         <select className="form-control" {...register('categoryId')}>
                                             {props.cate && props.cate.map(item => {
                                                 return (
@@ -95,7 +102,9 @@ const AddPro = (props: ProAddProps) => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label> Giá <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="text" className="form-control" placeholder="Nhập giá....." {...register('price')} />
+                                        <input type="text" className="form-control" placeholder="Nhập giá....." {...register('price', { required: true, minLength: 5 })} />
+                                        {errors.price && errors.price.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.price && errors.price.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
                                     </div>
                                 </div>
                             </div>
@@ -103,21 +112,35 @@ const AddPro = (props: ProAddProps) => {
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <label>Số lượng </label>
-                                        <input type="text" className="form-control" {...register('quantity')} />
+                                        <label>Số lượng <span style={{ color: 'red' }}>*</span> </label>
+                                        <input type="text" className="form-control" {...register('quantity', { required: true, minLength: 5 })} />
+                                        {errors.quantity && errors.quantity.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.quantity && errors.quantity.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label>Hình ảnh <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="file" className="form-control"  onChange={(e) => { setImage(e.target.files[0]) }}  />
+                                        <input type="file" className="form-control" onChange={(e) => { setImage(e.target.files[0]) }} />
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group">
-                                    <label>MÔ TẢ <span style={{ color: 'red' }}>*</span></label>
-                                    <textarea className="form-control" rows={6} placeholder="Mô tả sản phẩm..." defaultValue={""} {...register('desc')} />
+                                <div className="col-sm-6">
+                                    <div className="form-group">
+                                        <label>Mô tả ngắn <span style={{ color: 'red' }}>*</span></label>
+                                        <textarea className="form-control" rows={4} placeholder="Mô tả sản phẩm..." defaultValue={""} {...register('short_desc', { required: true, minLength: 5 })} />
+                                        {errors.short_desc && errors.short_desc.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.short_desc && errors.short_desc.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="form-group">
+                                        <label>MÔ TẢ <span style={{ color: 'red' }}>*</span></label>
+                                        <textarea className="form-control" rows={4} placeholder="Mô tả sản phẩm..." defaultValue={""} {...register('desc', { required: true, minLength: 5 })} />
+                                        {errors.desc && errors.desc.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.desc && errors.desc.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
+                                    </div>
                                 </div>
                             </div>
                             <br />

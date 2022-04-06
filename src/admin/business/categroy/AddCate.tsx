@@ -21,7 +21,7 @@ const AddCate = (props: CateAddProps) => {
         props.onAdd(data);
         toastr.success("Thêm mới thành công, chuyển trang sau 2s");
         setTimeout(() => {
-             navigate('/admin/category')
+            navigate('/admin/category')
         }, 2000);
     }
     return (
@@ -43,7 +43,9 @@ const AddCate = (props: CateAddProps) => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label>Tên danh mục <span style={{ color: 'red' }}>*</span> </label>
-                                        <input type="text" className="form-control" placeholder="Nhập tên danh mục....."  {...register('name')}/>
+                                        <input type="text" className="form-control" placeholder="Nhập tên danh mục....."  {...register('name', { required: true, minLength: 5 })} />
+                                        {errors.name && errors.name.type === 'required' && <span style={{ color: 'red' }}>Không dược để trống!</span>}
+                                        {errors.name && errors.name.type === 'minLength' && <span style={{ color: 'red' }}>Ít nhất 5 kí tự</span>}
                                     </div>
                                 </div>
                             </div>
