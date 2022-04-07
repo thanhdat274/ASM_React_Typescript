@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes, useParams } from "react-router-dom";
 import axios from "axios";
-import './public/client/style.css'
+import './public/client/style.css';
+import "swiper/css/bundle";
 import AdminLayout from "./admin/layouts/AdminLayout";
 import Dashboard from "./admin/business/Dashboard";
 import WebsiteLayout from "./client/layouts/WebsiteLayout";
