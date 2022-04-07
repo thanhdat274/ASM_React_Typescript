@@ -21,6 +21,7 @@ const Signin = () => {
       toastr.success("Đăng nhập tài khoản thành công, chuyển sang trang chủ sau 2s");
       setTimeout(() => {
         authenticate(user, () => navigate('/'))
+        window.location.reload();
       }, 2000);
     } catch (error) {
       toastr.error("Tên tài khoản hoặc mật khẩu không đúng!");

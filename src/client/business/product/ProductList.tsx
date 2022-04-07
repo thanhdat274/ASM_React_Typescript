@@ -1,10 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { listCateAndPro, listPro } from '../../../api/products';
 import { Link, useParams } from 'react-router-dom';
 import { ProductType } from '../../../types/product';
-import { listCate } from '../../../api/category';
-import { CategoryType } from '../../../types/category';
 type ListPro = {
     data: ProductType[];
     onList: (id: number) => void
@@ -28,7 +25,7 @@ const ProductList = (props: ListPro) => {
                             <i className="fa fa-angle-left" aria-hidden="true" />
                         </div>
                         <div className="text-yellow-500">
-                            <a href="/" className="text-yellow-500 font-semibold">Quay lại trang</a>
+                            <Link to="/" className="text-yellow-500 font-semibold">Quay lại trang</Link>
                         </div>
                         <div className="mx-2 text-[#5d5f6c]">
                             <i className="fa fa-angle-right" aria-hidden="true" />
@@ -39,7 +36,7 @@ const ProductList = (props: ListPro) => {
                     </div>
                     <div className="my-[20px]">
                         <div className="grid grid-cols-5 gap-8">
-                            {props.data && props.data.map((item, index) => {
+                            {props.data.product && props.data.product.map((item, index) => {
                                 return <div key={index} className="border p-3">
                                     <Link to={`/product/${item._id}`}>
                                         <img src={item.img} className="w-[250px] h-[250px]" />

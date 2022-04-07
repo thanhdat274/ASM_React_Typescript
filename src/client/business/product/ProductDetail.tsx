@@ -15,7 +15,7 @@ const ProductDetail = (props: ListProDeatil) => {
             await props.onListDetail(id);
         }
         getPro();
-    }, [id])
+    }, [])
     return (
         <div>
             <main className="my-[20px]">

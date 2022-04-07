@@ -19,6 +19,7 @@ type FormValues = {
   password: string,
   phone: string,
   address: string,
+  img: string,
   role: number
 }
 

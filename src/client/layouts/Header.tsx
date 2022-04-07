@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { CategoryType } from '../../types/category';
 import { isAuthenticate } from '../../utils/localStorage';
 const {user} = isAuthenticate();
@@ -9,6 +9,11 @@ type ListCate = {
 }
 
 const Header = (props: ListCate) => {
+  // const navigate = useNavigate();
+  const logout =() =>{
+    localStorage.removeItem("user");
+    window.location.reload();
+  }
   return (
     <div>
       <div className="bg-white h-[50px] mb-[10px]">
@@ -36,7 +41,7 @@ const Header = (props: ListCate) => {
             <div className="grid grid-cols-1 mx-auto">
                 {user ? <ul className="flex">
                             <li className="flex items-center">Xin chao <span className="block py-3 px-4">{user.name}</span></li>
-                            <li><Link to={`/`} className="block py-3 px-4" id="logout">logout</Link></li>
+                            <li><Link to={`/`} className="block py-3 px-4" onClick={()=>{logout()}} >logout</Link></li>
                         </ul> : <ul className="flex">
                 <li className="mx-4"><Link to="/signup">Đăng ký</Link></li>
                 <li className="mx-4 text-[#f1aa0c]"><Link to={'#'}>|</Link></li>

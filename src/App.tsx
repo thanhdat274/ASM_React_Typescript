@@ -45,7 +45,7 @@ function App() {
   },[])
   const ListCateAndPro = async (id: number) => {
     const { data } = await listCateAndPro(id)
-    setPro(data.product);
+    setPro(data);
     console.log(data);
   }
   const ListProDetail = async (id: number) => {
