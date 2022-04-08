@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ProductType } from '../../types/product';
 import Banner from '../layouts/Banner'
-import { useEffect } from 'react';
 
 type ListPro = {
   data: ProductType[];

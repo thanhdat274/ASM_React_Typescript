@@ -6,7 +6,7 @@
         @apply mx-5 leading-[35px] inline-block
     }
     .sub-menu-item {
-        @apply block p-2 hover: font-medium hover: text-black cursor-pointer border-b-[1px] border-slate-400
+        @apply block p-2 hover:font-medium hover:text-black cursor-pointer border-b-[1px] border-slate-400
     }
     .shopee-cart-number-badge {
         @apply relative rounded-[2.75rem] min-w-[0.6875rem] leading-[1.2em] p-[0.3125rem] top-[-10px]

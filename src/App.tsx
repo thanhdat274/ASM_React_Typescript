@@ -151,7 +151,7 @@ function App() {
         <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
           <Route index element={<Dashboard />} />
           <Route path="category">
-            <Route index element={<ListCate data={category} onRemove={removeCate} />} />
+            <Route index element={<ListCate data={category} onRemove={removeCate}/>} />
             <Route path="add" element={<AddCate onAdd={addCate} />} />
             <Route path=":id/edit" element={<EditCate onUpdate={updateCate} />} />
           </Route>

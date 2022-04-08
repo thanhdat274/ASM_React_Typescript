@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { UserType } from '../../../types/user';
+import { useState } from 'react';
 
 type ListUser = {
   data: UserType[];
@@ -8,6 +9,12 @@ type ListUser = {
 }
 
 const ListUser = (props: ListUser) => {
+  const [fillter, setfillter] = useState("");
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setfillter(value);
+  };
   return (
     <div className="row">
       <div className="col-12">
@@ -18,7 +25,7 @@ const ListUser = (props: ListUser) => {
               <div className="row">
                 <div className="col-6">
                   <div className="form-group">
-                    <input type="text" name="keyword" className="form-control" placeholder="Tìm kiếm..." aria-describedby="helpId" />
+                    <input type="text" name="keyword" className="form-control" placeholder="Tìm kiếm..." onChange={handleSearch} value={fillter} />
                   </div>
                 </div>
               </div>
@@ -42,7 +49,13 @@ const ListUser = (props: ListUser) => {
                 </tr>
               </thead>
               <tbody>
-                {props.data && props.data.map((item, index) => {
+                {props.data && props.data.filter((val) => {
+                  if (fillter == "") {
+                    return val
+                  } else if (val.email.toLocaleLowerCase().includes(fillter.toLowerCase())) {
+                    return val;
+                  }
+                }).map((item, index) => {
                   return <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{item.email}</td>

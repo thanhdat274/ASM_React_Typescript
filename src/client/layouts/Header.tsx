@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { CategoryType } from '../../types/category';
 import { isAuthenticate } from '../../utils/localStorage';
-const {user} = isAuthenticate();
+const { user } = isAuthenticate();
 
 type ListCate = {
   data: CategoryType[];
@@ -10,7 +10,7 @@ type ListCate = {
 
 const Header = (props: ListCate) => {
   // const navigate = useNavigate();
-  const logout =() =>{
+  const logout = () => {
     localStorage.removeItem("user");
     window.location.reload();
   }
@@ -39,10 +39,17 @@ const Header = (props: ListCate) => {
                 037.462.9999 - 096.539.7966</span></p>
             </div>
             <div className="grid grid-cols-1 mx-auto">
-                {user ? <ul className="flex">
-                            <li className="flex items-center">Xin chao <span className="block py-3 px-4">{user.name}</span></li>
-                            <li><Link to={`/`} className="block py-3 px-4" onClick={()=>{logout()}} >logout</Link></li>
-                        </ul> : <ul className="flex">
+              {user ? <ul className="flex menu-item">
+                <li className="flex items-center group"><Link to={'#'}>Xin chao <span className="block py-3 px-4">{user.name}</span></Link>
+                  <div className="grid grid-cols-3 p-[10px] absolute bg-gray-200 border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <ul className="sub-menu-item">
+                      <li className="sub-menu-item"><Link to={`/user/${user._id}`}>Thông tin cá nhân</Link></li>
+                      {user.role === 1 ? <li className="sub-menu-item"><Link to={`/admin`}>Trang quản trị</Link></li> : ''}
+                    </ul>
+                  </div>
+                </li>
+                <li><Link to={`/`} className="block py-3 px-4" onClick={() => { logout() }} >logout</Link></li>
+              </ul> : <ul className="flex">
                 <li className="mx-4"><Link to="/signup">Đăng ký</Link></li>
                 <li className="mx-4 text-[#f1aa0c]"><Link to={'#'}>|</Link></li>
                 <li className="mx-4"><Link to="/signin">Đăng nhập</Link></li>
