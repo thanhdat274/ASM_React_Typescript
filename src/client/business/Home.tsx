@@ -17,7 +17,7 @@ const Home = (props: ListPro) => {
           <div className="my-[20px]">
             <h2 className="font-semibold text-2xl uppercase my-[30px] text-center">Tất cả Sản phẩm</h2>
             <div className="grid grid-cols-5 gap-8">
-              {props.data && props.data.map((item, index) => {
+              {props.data && props.data.slice(0, 20).map((item, index) => {
                 return <div key={index} className="border p-3">
                   <Link to={`/product/${item._id}`}>
                     <img src={item.img} className="w-[250px] h-[250px]" />

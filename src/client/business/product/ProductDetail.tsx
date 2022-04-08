@@ -3,19 +3,18 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ProductType } from '../../../types/product';
 import { listOnePro } from '../../../api/products';
-type ListProDeatil = {
-    data: ProductType[];
-    onListDetail: (id: number) => void
-}
 
-const ProductDetail = (props: ListProDeatil) => {
+const ProductDetail = () => {
     const { id } = useParams();
+    const [product, setProduct] = useState<ProductType>()
     useEffect(() => {
-        const getPro = async () => {
-            await props.onListDetail(id);
-        }
-        getPro();
-    }, [])
+      const getProduct = async () => {
+        const { data } = await listOnePro(id);
+        console.log(data);
+        setProduct(data)
+      }
+      getProduct();
+    }, [id]);
     return (
         <div>
             <main className="my-[20px]">
@@ -35,25 +34,25 @@ const ProductDetail = (props: ListProDeatil) => {
                                 <i className="fa fa-angle-right" aria-hidden="true" />
                             </div>
                             <div className="text-yellow-500 font-semibold">
-                                {props.data.name}
+                                {product?.name}
                             </div>
                         </div>
                         <div className="w-[1080px] h-auto flex justify-between mt-[20px]">
                             <div className="w-[500px] h-[500px] mr-[20px] border">
                                 <div>
-                                    <img src={props.data.img} className="w-[500px] h-[500px]" />
+                                    <img src={product?.img} className="w-[500px] h-[500px]" />
                                 </div>
                             </div>
                             <div className="w-[460px]">
                                 <div className="text-[30px] font-semibold mb-3 w-[460px]">
-                                    {props.data.name}
+                                    {product?.name}
                                 </div>
                                 <div className="text-[#51545f] mb-[20px] w-[460px]">
                                     <h1 className="text-[21px] font-semibold">Thông tin chung:</h1>
-                                    <div className="font-medium text-[16px] break-words mt-[10px]">{props.data.short_desc}</div>
+                                    <div className="font-medium text-[16px] break-words mt-[10px]">{product?.short_desc}</div>
                                 </div>
                                 <div className="text-[#fe4c50] font-semibold text-2xl mb-5">
-                                    {props.data.price}
+                                    {product?.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" })}
                                 </div>
                                 <div className="flex">
                                     <div className="text-[#1e1e27] mt-1">
@@ -74,7 +73,7 @@ const ProductDetail = (props: ListProDeatil) => {
                             thông tin chi tiết sản phẩm
                         </div>
                         <div className="w-[1080px] my-[20px]">
-                            {props.data.desc}
+                            {product?.desc}
                         </div>
                     </div>
                     <div className="w-[1080px] h-auto mx-auto">
@@ -83,7 +82,7 @@ const ProductDetail = (props: ListProDeatil) => {
                         </div>
                         <div className="w-[1080px] my-[20px]">
                             <div className="my-[20px]">
-                                {/* <div className="grid grid-cols-4 gap-8">
+                                <div className="grid grid-cols-4 gap-8">
                                     ${'{'}data2.data.slice(0, 8).map((item) =&gt; {'{'}
                                     if (item.categoryProductId === data.categoryProductId) {'{'}
                                     return `
@@ -97,7 +96,7 @@ const ProductDetail = (props: ListProDeatil) => {
                                     `;
                                     {'}'}
                                     {'}'}).join(""){'}'}
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>

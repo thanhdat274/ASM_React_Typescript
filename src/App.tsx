@@ -49,11 +49,6 @@ function App() {
     setPro(data);
     console.log(data);
   }
-  const ListProDetail = async (id: number) => {
-    const { data } = await listOnePro(id)
-    setPro(data);
-    console.log(data);
-  }
 
   // ---------------------------------------------
 
@@ -150,7 +145,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="category/:id" element={<ProductList data={pro} onList={ListCateAndPro} />} />
-          <Route path="product/:id" element={<ProductDetail data={pro} onListDetail={ListProDetail} />} />
+          <Route path="product/:id" element={<ProductDetail/>} />
         </Route>
 
         <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>

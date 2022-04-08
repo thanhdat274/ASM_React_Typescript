@@ -11,7 +11,7 @@ const ProductList = (props: ListPro) => {
     const { id } = useParams();
     useEffect(() => {
         const getPro = async () => {
-            await props.onList(id);
+             props.onList(id);
         }
         getPro();
     }, [id])
@@ -31,7 +31,7 @@ const ProductList = (props: ListPro) => {
                             <i className="fa fa-angle-right" aria-hidden="true" />
                         </div>
                         <div className="text-yellow-500 font-semibold">
-                            {props.data.name}
+                            {props.data.categoryId?.name}
                         </div>
                     </div>
                     <div className="my-[20px]">
