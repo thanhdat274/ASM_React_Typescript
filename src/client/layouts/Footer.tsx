@@ -53,12 +53,12 @@ const Footer = () => {
                     </div>
                     <div className="box">
                         <h1 className="title uppercase">Liên kết</h1>
-                        <div className="mb-[15px]">
-                            <i className="fa text-[24px] text-sky-700"></i>
+                        <div className="mb-[15px] flex">
+                            <i className="fa text-[24px] text-sky-700"></i>&ensp;
                             <Link to="https://www.facebook.com/nguyenthanhdat2704">Facebook</Link>
                         </div>
-                        <div>
-                            <i className="fa text-[24px] text-red-500"></i>
+                        <div className='flex'>
+                            <i className="fa text-[24px] text-red-500"></i>&ensp;
                             <Link to="https://www.youtube.com/channel/UC4sDBq20omspK3BZdEfI5fQ">Youtube</Link>
                         </div>
                     </div>

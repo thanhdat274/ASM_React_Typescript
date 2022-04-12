@@ -4,16 +4,20 @@ import { useState, useEffect } from 'react';
 import { ProductType } from '../../../types/product';
 import { listOnePro } from '../../../api/products';
 
-const ProductDetail = () => {
+
+
+const ProductDetail = ({ data2 }) => {
+    console.log(data2);
+
     const { id } = useParams();
     const [product, setProduct] = useState<ProductType>()
     useEffect(() => {
-      const getProduct = async () => {
-        const { data } = await listOnePro(id);
-        console.log(data);
-        setProduct(data)
-      }
-      getProduct();
+        const getProduct = async () => {
+            const { data } = await listOnePro(id);
+            console.log(data);
+            setProduct(data)
+        }
+        getProduct();
     }, [id]);
     return (
         <div>
@@ -83,19 +87,18 @@ const ProductDetail = () => {
                         <div className="w-[1080px] my-[20px]">
                             <div className="my-[20px]">
                                 <div className="grid grid-cols-4 gap-8">
-                                    ${'{'}data2.data.slice(0, 8).map((item) =&gt; {'{'}
-                                    if (item.categoryProductId === data.categoryProductId) {'{'}
-                                    return `
-                                    <div className="border p-3">
-                                        <a href="/products/${item.id}">
-                                            <img src="${item.img}" className="w-[250px] h-[250px]" />
-                                        </a>
-                                        <h3 className="my-3"><a href="/products/${item.id}" className="font-semibold text-lg ">${'{'}item.name{'}'}</a></h3>
-                                        <p className="text-[red] font-semibold text-[16px]">${'{'}item.price.toLocaleString("vi-VN", {'{'} style: "currency", currency: "VND" {'}'}){'}'}</p>
-                                    </div>
-                                    `;
-                                    {'}'}
-                                    {'}'}).join(""){'}'}
+                                    {data2 && data2.map((item, index) => {
+                                        if (item.categoryId === product?.categoryId) {
+                                            return <div key={index} className="border p-3">
+                                                <Link to={`/product/${item._id}`}>
+                                                    <img src={item.img} className="w-[250px] h-[250px]" />
+                                                </Link>
+                                                <h3 className="my-3"><Link to={`/product/${item._id}`} className="font-semibold text-lg">{item.name}</Link></h3>
+                                                <p className="text-[red] font-semibold text-[16px]">{item.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</p>
+                                            </div>
+                                        }
+
+                                    })}
                                 </div>
                             </div>
                         </div>

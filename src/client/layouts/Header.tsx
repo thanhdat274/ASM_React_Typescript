@@ -39,16 +39,17 @@ const Header = (props: ListCate) => {
                 037.462.9999 - 096.539.7966</span></p>
             </div>
             <div className="grid grid-cols-1 mx-auto">
-              {user ? <ul className="flex menu-item">
-                <li className="flex items-center group"><Link to={'#'}>Xin chao <span className="block py-3 px-4">{user.name}</span></Link>
-                  <div className="grid grid-cols-3 p-[10px] absolute bg-gray-200 border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <ul className="sub-menu-item">
-                      <li className="sub-menu-item"><Link to={`/user/${user._id}`}>Thông tin cá nhân</Link></li>
-                      {user.role === 1 ? <li className="sub-menu-item"><Link to={`/admin`}>Trang quản trị</Link></li> : ''}
+              {user ? <ul className="flex h-[50px]">
+                <li className="group">
+                  <Link to={'#'} className='flex nav-item'>Xin chào <span className="px-4">{user.name}</span></Link>
+                  <div className="grid grid-cols-1 px-[10px] absolute bg-gray-200 border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <ul className="p-2">
+                      <li><Link  className="sub-menu-item" to={`/user/${user._id}`}>Thông tin cá nhân</Link></li>
+                      {user.role === 1 ? <li ><Link className="sub-menu-item" to={`/admin`}>Trang quản trị</Link></li> : ''}
                     </ul>
                   </div>
                 </li>
-                <li><Link to={`/`} className="block py-3 px-4" onClick={() => { logout() }} >logout</Link></li>
+                <li><Link to={`/`} className="block px-4" onClick={() => { logout() }} >logout</Link></li>
               </ul> : <ul className="flex">
                 <li className="mx-4"><Link to="/signup">Đăng ký</Link></li>
                 <li className="mx-4 text-[#f1aa0c]"><Link to={'#'}>|</Link></li>

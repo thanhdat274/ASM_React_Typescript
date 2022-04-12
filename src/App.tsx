@@ -14,7 +14,7 @@ import { CategoryType } from "./types/category";
 import AddCate from "./admin/business/categroy/AddCate";
 import EditCate from "./admin/business/categroy/EditCate";
 import { ProductType } from "./types/product";
-import { addPro, deletePro, listPro, updatePro, listCateAndPro, listOnePro } from './api/products';
+import { addPro, deletePro, listPro, updatePro, listCateAndPro, listOnePro, listPriceDesc, listPriceAsc } from './api/products';
 import ListPro from "./admin/business/product/ListPro";
 import AddPro from "./admin/business/product/AddPro";
 import EditPro from "./admin/business/product/EditPro";
@@ -36,18 +36,20 @@ function App() {
   const [user, setUser] = useState<UserType[]>([]);
 
   // Phần hàm xử lý của client
-  useEffect(() => {
-    const ListProduct = async () => {
-      const { data } = await listPro()
-      setPro(data);
-      console.log(data);
-    }
-    ListProduct();
-  },[])
   const ListCateAndPro = async (id: number) => {
     const { data } = await listCateAndPro(id)
     setPro(data);
     console.log(data);
+  }
+  const ListPriceDesc = async() =>{
+    const {data} = await listPriceDesc();
+    setProduct(data)
+    console.log(data);
+  }
+  const ListPriceAsc = async() =>{
+    const {data} = await listPriceAsc();
+    setProduct(data)
+    console.log(data); 
   }
 
   // ---------------------------------------------
@@ -141,11 +143,11 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<WebsiteLayout />}>
-          <Route index element={<Home data={product} />} />
+          <Route index element={<Home data={product} onListAsc={ListPriceAsc} onListDesc={ListPriceDesc} />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="category/:id" element={<ProductList data={pro} onList={ListCateAndPro} />} />
-          <Route path="product/:id" element={<ProductDetail/>} />
+          <Route path="product/:id" element={<ProductDetail data2={product}/>} />
         </Route>
 
         <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
