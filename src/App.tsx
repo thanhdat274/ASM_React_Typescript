@@ -36,7 +36,7 @@ function App() {
   const [user, setUser] = useState<UserType[]>([]);
 
   // Phần hàm xử lý của client
-  const ListCateAndPro = async (id: number) => {
+  const ListCateAndPro = async (id: string) => {
     const { data } = await listCateAndPro(id)
     setPro(data);
     console.log(data);
@@ -63,7 +63,7 @@ function App() {
     };
     getCate();
   }, []);
-  const removeCate = async (id: number) => {
+  const removeCate = async (id: string) => {
     const confirm = window.confirm("Bạn có chắc chắn không??");
     if (confirm) {
       const { data } = await remove(id);
@@ -91,7 +91,7 @@ function App() {
     };
     getPro();
   }, []);
-  const removePro = async (id: number) => {
+  const removePro = async (id: string) => {
     const confirm = window.confirm("Bạn có chắc chắn không??");
     if (confirm) {
       const { data } = await deletePro(id);
@@ -118,7 +118,7 @@ function App() {
     };
     getUser();
   }, []);
-  const removeUser = async (id: number) => {
+  const removeUser = async (id: string) => {
     const confirm = window.confirm("Bạn có chắc chắn không??");
     if (confirm) {
       const { data } = await deleteUser(id);

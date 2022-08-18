@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type ListUser = {
   data: UserType[];
-  onRemove: (id: number) => void
+  onRemove: (id: string) => void
 }
 
 const ListUser = (props: ListUser) => {

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type ListPro = {
     data: ProductType[];
-    onRemove: (id: number) => void
+    onRemove: (id: string) => void
 }
 
 const ListPro = (props: ListPro) => {

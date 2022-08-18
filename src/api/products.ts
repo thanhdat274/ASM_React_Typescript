@@ -7,15 +7,15 @@ export const listPro = () => {
     const url = '/products'
     return instance.get(url);
 }
-export const listOnePro = (id: number) => {
+export const listOnePro = (id: string) => {
     const url = `/products/${id}`
     return instance.get(url);
 }
-export const listCateAndPro = (id: number) => {
+export const listCateAndPro = (id: string) => {
     const url = `/category/${id}?_embed=products`
     return instance.get(url);
 }
-export const deletePro = (id: number) => {
+export const deletePro = (id: string) => {
     const url = `/products/${id}`
     return instance.delete(url)
 }

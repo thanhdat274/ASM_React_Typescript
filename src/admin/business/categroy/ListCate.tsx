@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type ListCate = {
     data: CategoryType[];
-    onRemove: (id: number) => void;
+    onRemove: (id: string) => void;
 }
 
 const ListCate = (props: ListCate) => {

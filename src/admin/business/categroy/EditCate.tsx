@@ -10,7 +10,7 @@ type CateAddProps = {
     onUpdate: (cate: CategoryType) => void
 }
 type FromValues = {
-    _id: number,
+    _id?: string,
     name: string,
     price: number
 };

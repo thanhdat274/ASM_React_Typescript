@@ -5,11 +5,11 @@ export const listUser = () =>{
     const url = '/user'
     return instance.get(url);
 }
-export const listOneUser = (id: number) =>{
+export const listOneUser = (id: string) =>{
     const url = `/user/${id}`
     return instance.get(url);
 }
-export const deleteUser =(id:number)=>{
+export const deleteUser =(id:string)=>{
     const url = `/user/${id}`
     return instance.delete(url)
 }

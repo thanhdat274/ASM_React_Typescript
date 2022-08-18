@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ProductType } from '../../../types/product';
 type ListPro = {
     data: ProductType[];
-    onList: (id: number) => void
+    onList: (id: string) => void
 }
 
 const ProductList = (props: ListPro) => {

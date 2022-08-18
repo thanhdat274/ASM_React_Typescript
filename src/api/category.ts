@@ -5,11 +5,11 @@ export const listCate = () =>{
     const url = '/category'
     return instance.get(url);
 }
-export const listOneCate = (id: number) =>{
+export const listOneCate = (id: string) =>{
     const url = `/category/${id}`
     return instance.get(url);
 }
-export const remove =(id:number)=>{
+export const remove =(id:string)=>{
     const url = `/category/${id}`
     return instance.delete(url)
 }
