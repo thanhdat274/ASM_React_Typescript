@@ -150,7 +150,8 @@ function App() {
           <Route path="product/:id" element={<ProductDetail data2={product}/>} />
         </Route>
 
-        <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
+        {/* <Route path="/admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}> */}
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="category">
             <Route index element={<ListCate data={category} onRemove={removeCate}/>} />
